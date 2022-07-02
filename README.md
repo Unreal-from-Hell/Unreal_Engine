@@ -17,6 +17,9 @@
 <a href="https://github.com/losie2">
   <img src="https://avatars.githubusercontent.com/u/75438820?v=4" width="100">
 </a>
+<a href="https://github.com/juhanpark">
+  <img src="https://avatars.githubusercontent.com/u/108555247?v=4" width="100">
+</a>
 </p>
 
 ---
