@@ -98,6 +98,7 @@
 2. 컴포넌트 추가 -> box collision 추가 -> 우클릭 이벤트 추가 -> OnComponentBeginOverlap
 3. 객체를 소멸시키는 DestroyActor 함수 호출 -> 타깃: Self 
 
+> Scene 컴포넌트가 Root가 되도록 해야 한다.
 
 ***좌표계를 가지기 위해선 Scene 컴포넌트를 상속해야 함***
 > Transform 정보를 가지고있음 
