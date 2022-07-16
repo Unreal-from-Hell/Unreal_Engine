@@ -278,7 +278,6 @@ PlayerController -> Player Camera Manager Class 의 + 선택하여 블루프린�
 > 스켈레탈 메시 에디터에서 피직스를 연결
 
 
-### 콜리전
 
 
 
