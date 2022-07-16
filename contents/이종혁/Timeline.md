@@ -50,16 +50,43 @@ SetRelativeLocation
 
 
 1. BeginPlay 이벤트에 타임라인 추가 후 연결 
-2. 타임라인 에디터에서 길이(초) 수정 후 루프 check 
-3. float 트랙 추가 
-4. Static Mesh Component를 드래그하여 블루프린트 에디터 안으로 배치 후 SetRelativeRotation의 타깃에 연결
+2. 타임라인 에디터에서 길이(초) 수정 후 루프 check(계속 반복할 경우) 
+3. float 트랙 추가 (shift + 좌클릭으로 key frame 추가)
+4. Static Mesh Component를 드래그하여 블루프린트 에디터 안으로 배치 후 SetRelativeRotation 액션 호출 후 타깃에 연결
 5. SetRelativeRotation의 New Rotation에 Make Rotator 연결 
 
+<br>
+
+### Coin의 Timeline을 통한 Yaw회전 
+<img src='./Images/Timeline/CoinTimeline.png' width=700/>
+
+<br>
 
 
+### Button timeline 
 
+<img src='./Images/Timeline/ButtonTimeline.png' width=700/>
 
+<br>
 
+* 선형 보간: key frame 우 클릭 -> 키 보간 -> 자동
+* 선형 보간을 위해서 Lerp 함수 호출 후 timeline에 연결
+* BoxTrigger의 On Component Begin Overlap 이벤트 호출 후 타임라인에 연결
+
+<br>
+
+### Gate Timeline
+
+<img src='./Images/Timeline/GateTimeline.png' width=700/>
+
+<br>
+
+* vetocr 트랙 추가 
+* X, Y, Z 축에 따른 key frame 설정 후 선형 보간
+* timeline과 SetRelativeLocation을 연결 
+* vector x vector 함수를 사용하여 y축에 -1을 곱해 반대쪽 액션도 추가 
+
+<br>
 
 
 
