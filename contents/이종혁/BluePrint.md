@@ -246,7 +246,7 @@ PlayerController -> Player Camera Manager Class 의 + 선택하여 블루프린�
 
 
 
-## 스켈레톤 메시의 콜리전
+## 스켈레탈 메시의 콜리전
 
 ### 콜리전
 
