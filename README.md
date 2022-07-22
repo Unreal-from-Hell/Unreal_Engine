@@ -40,6 +40,7 @@
  * [Timeline](./contents/이종혁/Timeline.md)
  * [Trigger](./contents/이종혁/Trigger.md)
  * [UserEvent](./contents/이종혁/UserEvent.md)
+ * [Object Create/Destroy](./contents/이종혁/Object.md)
 
 
 ### [박주한](./contents/박주한)
