@@ -22,3 +22,38 @@
 
 <br>
 
+## Gate open/close 실습하기
+
+<br>
+
+### GateClose Event 만들기
+
+1. GateActor 블루프린트 에디터 열기
+2. 빈 곳에 custom event(open) 추가하기
+3. GateTimeline에 연결
+4. custom event(close) 추가
+5. GateTimeline의 Reverse에 연결하면 설정해둔 timeline을 역순으로 실행한다.
+
+<br>
+
+### 새 레벨 만들기
+1. GateActor 배치하기
+2. 레벨 블루프린트 에디터 열기
+3. 'o' 키보드 입력 이벤트 배치
+4. GateActor에 대한 레퍼런스 생성
+5. custom event 호출
+
+<br>
+
+## 이벤트 디스패처 실습하기
+
+
+1. 왼쪽의 이벤트 디스패처 추가하기
+2. 드래그하여 블루프린트 에디터에 추가(호출)
+3. switch timeline의 finished 핀을 이벤트 디스패처에 연결
+4. 레벨 블루프린트 이벤트 추가 -> 이벤트 디스패처 추가
+4. 레벨 블루프린트 에디터에서 이벤트 디스패처 이벤트에 GateActor의 custom event 연결
+
+<br>
+
+
