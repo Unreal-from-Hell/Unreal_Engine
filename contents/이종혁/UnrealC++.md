@@ -2,7 +2,7 @@
 
 ## 클래스 상속
 
-<img src="./Images/parent.png" width="500"/>  
+<img src="./Images/UnrealC++/parent.png" width="500"/>  
 
 <br>
 
@@ -12,7 +12,7 @@
 
 <br><br><br>
 
-<img src="./Images/class_inheritance.png" width="300"/>  
+<img src="./Images/UnrealC++/class_inheritance.png" width="300"/>  
 
 <br><br>
 
@@ -50,7 +50,7 @@ public:
 
 <br><br><br>
 
-<img src="./Images/inheritance_hierachy.png" width="600"/>  
+<img src="./Images/UnrealC++/inheritance_hierachy.png" width="600"/>  
 
 또한 계승 계층은 다수의 자식 클래스를 같은 부모 클래스로 부터 파생시킬 수 있다.
 
@@ -59,7 +59,7 @@ public:
 
 <br><br>
 
-<img src="./Images/Upcasting.png" width="600"/>  
+<img src="./Images/UnrealC++/Upcasting.png" width="600"/>  
 
 부모 클래스는 parent의 포인터 형식으로 가르키며 자식 클래스 또한 가르킬 수 있다 
 > 이것을 `업 캐스팅(UpCasting)` 이라고 한다.
@@ -70,7 +70,7 @@ public:
 ## Unreal Engine Hierarchy
 
 
-<img src="./Images/Unreal_hierachy.png" width="500"/>  
+<img src="./Images/UnrealC++/Unreal_hierachy.png" width="500"/>  
 
 <br>
 
@@ -97,7 +97,7 @@ public:
 
 <br>
 
-<img src="./Images/isa.png" width="500"/>  
+<img src="./Images/UnrealC++/isa.png" width="500"/>  
 
 자식 클래스는 부모 클래스 이지만, 부모 클래스는 자식 클래스가 아니다.
 
@@ -108,7 +108,7 @@ public:
 
 <br>
 
-<img src="./Images/Unreal_isa.png" width="500"/>  
+<img src="./Images/UnrealC++/Unreal_isa.png" width="500"/>  
 
 1. 오브젝트는 액터, 폰이 아니다
 2. 액터는 폰이 아니다
@@ -122,7 +122,7 @@ public:
 
 ## has a 관계
 
-<img src="./Images/hasa.png" width="400"/>  
+<img src="./Images/UnrealC++/hasa.png" width="400"/>  
 
 ### Outer class는 inner class를 가진다.
 
@@ -132,7 +132,7 @@ public:
 
 <br>
 
-<img src="./Images/Unreal_hasa.png" width="700"/>  
+<img src="./Images/UnrealC++/Unreal_hasa.png" width="700"/>  
 
 1. 패키지는 월드를 가진다 / 월드는 패키지의 `서브객체(SubObject)`이다.
 2. 월드는 레벨을 가진다 / 레벨은 월드의 서브객체이다
@@ -154,13 +154,13 @@ public:
 
 <br>
 
-<img src="./Images/Garbage.png" width="600"/>  
+<img src="./Images/UnrealC++/Garbage.png" width="600"/>  
 
 시스템은 객체가 더 이상 참조되지 않을 때 변수를 자동으로 삭제한다.
 
 <br><br>
 
-<img src="./Images/macro.png" width="700"/>  
+<img src="./Images/UnrealC++/macro.png" width="700"/>  
 
 UCLASS, UPROPERTY, UFUNCTION 매크로는 reflection에 대한 각각의 클래스, 변수, 함수를 표시한다.
 
@@ -208,7 +208,7 @@ void UMyObject::MyFunction()
 <br><br>
 
 
-<img src="./Images/Error.png" width="700"/>  
+<img src="./Images/UnrealC++/Error.png" width="700"/>  
 
 ### Default Value 값이 None이기 때문에 property를 읽어올 수 없다는 에러가 발생한다 
 > None이라는 뜻은 C++에서 NULL pointer라는 뜻이다 
@@ -220,7 +220,7 @@ void UMyObject::MyFunction()
 
 
 
-<img src="./Images/Construct.png" width="700"/>  
+<img src="./Images/UnrealC++/Construct.png" width="700"/>  
 
 
 Construct의 Class를 나의 Blueprint 클래스, Outer를 상위 객체인 MyActor로 설정한 노드를 Set 오브젝트로 연결하면 변수 초기화가 진행된다. 이후 MyFunction 오브젝트와 연결하면 오류없이 작동하는 것을 볼 수 있다.
