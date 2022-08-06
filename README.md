@@ -8,12 +8,6 @@
 <a href="https://github.com/jonghyeok98">
   <img src="https://avatars.githubusercontent.com/u/77715064?v=4" width="100">
 </a>
-<a href="https://github.com/iamgyu">
-  <img src="https://avatars.githubusercontent.com/u/11960250?v=4" width="100">
-</a>
-<a href="https://github.com/hsa6283">
-  <img src="https://avatars.githubusercontent.com/u/80310260?v=4" width="100">
-</a>
 <a href="https://github.com/juhanpark">
   <img src="https://avatars.githubusercontent.com/u/108555247?v=4" width="100">
 </a>
@@ -45,12 +39,7 @@
 
 ### [박주한](./contents/박주한)
 
-### [김동규](./contents/김동규)
+
 
 ### [이민규](./contents/이민규)
 
-### [함승아](./contents/함승아)
- * [엔터테인먼트 소프트웨어 전체 강의자료 요약](./contents/함승아/1주차.md)
- * [러셀 강의 1주차(언리얼 엔진 기본 단축키)](./contents/함승아/2주차.md)
- * [러셀 강의 2주차(퀵셀 메가스캔)](./contents/함승아/3주차.md)
- * [러셀 강의 3주차(조명, 환경)](./contents/함승아/4주차.md)
