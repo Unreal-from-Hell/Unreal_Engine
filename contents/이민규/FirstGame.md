@@ -27,8 +27,8 @@ PressurePlate 추가
 >Since 2022.08.10
 
 <br>
-<img src='./Images/Bot.png' width=400/>
-<img src='./Images/All.png' width=400/>
-<img src='./Images/Open.png' width=400/>
-<img src='./Images/CLose.png' width=400/>
+<img src='./Images/Bot.png' width=350/>
+<img src='./Images/All.png' width=350/>
+<img src='./Images/Open.png' width=350/>
+<img src='./Images/Close.png' width=350/>
 <br>
