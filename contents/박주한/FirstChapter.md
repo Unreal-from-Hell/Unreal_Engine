@@ -32,15 +32,15 @@
 
 # 1주차 강의 실습
 
-<img src='./Images/1주차.png' width=4000/>  
+<img src='./Images/1주차.PNG' width=4000/>  
 <br>
 <br>
 <br>
-<img src='./Images/1주차2.png' width=700/>
+<img src='./Images/1주차2.PNG' width=700/>
 <br>
 <br>
 <br>
-<img src='./Images/1주차3.png' width=700/>
+<img src='./Images/1주차3.PNG' width=700/>
 <br>
 <br>
 <br>
