@@ -6,6 +6,10 @@
 - PostInitProperties : 오브젝트에서 변수가 초기화될 때 호출되는 함수  
 - PostEditChangeProperty : 변수가 수정될 때 호출되는 함수  
 - SetUpPlayerInputComponent : 플레이어의 입력을 받는 함수 -> BindAxis(매핑명칭 , this , 발동할함수) , BindAction(매핑명칭 , 입력결정 , this , 발동할함수)
+- GetCapusleComponent : 캡슐을 불러오는 함수
+->InitCapsuleSize(넓이 , 높이)
+- ACharacter::Jump : 캐릭터 위로 뛰는 함수
+- ACharacter::StopJumping : 캐릭터의 점프가 멈추는 함수
 
 ## 함수
 - CreateDefaultSubobject<클래스>(TEXT("사용할 이름")) : C++의 New와 동일
@@ -21,20 +25,22 @@
 ## 변수
 - FRotationMatrix : 행렬 컨테이너
 - FVector : X, Y, Z으로 구성된 3차원 공간의 벡터입니다.(자료구조 Vector아님!)
-- FRotator : pitch : Y Roll : X Yaw : Z로 구성된 회전을 위한 컨테이너
+- FRotator : Roll : X pitch : Y  Yaw : Z로 구성된 회전을 위한 컨테이너
 
 ## 매크로
 - UE_LOG(LogTemp , 경고난이도 , TEXT) : 출력로그를 출력할수있음(Fatal , Error , Warning , Dispaly)
-- UPROPERTY() -> 언리얼 변수 설정 지정을 위해 필요한 매크로  
+- UPROPERTY() : 언리얼 변수 설정 지정을 위해 필요한 매크로  
 EditAnyWhere : 블루프린트 원본과 레벨에 배치된 양쪽 모두에서 편집가능  
 VisibleAnyWhere : 프로퍼티창에서 보이지만 편집은 불가능  
 BlueprintReadWrite : 블루프린트에서 읽기와 수정이 모두가능  
 BlueprintReadOnly : 블루프린트에서 읽기만 가능  
+Edit/visible : 편집 or 보기만  
+Defaults/Instance : 클래스설계도 or 인스턴스에서만  
 Transient : 프로퍼티가 휘발성 프로퍼티로 저장되지 않음  
-Category : 편집툴, 패널 에서 프로퍼티를 카테고리로 묶어서 보여줌  
-Edit/visible -> 편집 or 보기만  
-Defaults/Instance : 클래스설계도 or 인스턴스에서만
-
+Category : 편집툴, 패널 에서 프로퍼티를 카테고리로 묶어서 보여줌 -> Category = "ABC | DEF  일 경우 ABC 하위의 DEF로됨
+meta : metadata라고 하며 에디터 관련 다양한 기능을 구현할 수 있음  
+->(AllowPrivateAccess = "true") : private일 경우 에디터에서 보이지않지만 AllowPrivateAccess를 true로 할경우 보임  
+->UIMin / UIMax : 에디터에서 조정할 수 있는 숫자 범위 지정 명령어  
 - UFUNCTION() -> 언리얼 함수 설정 지정을 위해 필요한 매크로  
 BlueprintCallable : 블루프린트에서도 사용 가능   
 BlueprintImplementableEvent  : 블루프린트에서 이벤트 설정가능  
@@ -50,8 +56,14 @@ Category : 필수
 - 스켈레탈 메시 컴포넌트(class USkeletalMeshComponent) : 인간형 폰의 비주얼을 담당하는 컴포넌트입니다.
 - 화살 컴포넌트(class UArrowComponent) : 편집을 위해 시선 방향을 가리키는 컴포넌트입니다. 
 - 카메라 컴포넌트(class UCameraComponent) : 폰에 빙의한 플레이어의 화면을 렌더링할 카메라 컴포넌트입니다
-- 스프링암 컴포넌트(class USpringArmComponent) : 카메라 구도를 쉽게 세팅할 수 있게 제공하는 컴포넌트입니다(삼각대라고 생각하면 편함)
-
+- 스프링암 컴포넌트(class USpringArmComponent) : 카메라 구도를 쉽게 세팅할 수 있게 제공하는 컴포넌트입니다(삼각대라고 생각하면 편함)  
+->Attach 할때 SpringArmComponent::SocketName을 넣어줘야 스프링암 소켓에 붙어짐  
+->bUsePawnControlRotation : 캐릭터의 컨트롤러의 회전을 따라 갈지 설정 
+- 캐릭터 무브먼트 컴포넌트(class UCharacterMovementComponent) : 서브 오브젝트로 달린 액터 (또는 캐릭터)에 일정한 형태의 이동을 제공합니다  
+->orientRotationtoMovement : 캐릭터가 가속되고 있는 방향으로 회전  
+->bUseControllerRotation(roll,pitch,yaw) : 폰이 컨트롤러의 pitch yaw roll을 가져갈지 결정  
+->BrakingDecelerationWalking : 미끄러짐 방지 설정  
+ 
 ## 딜리게이트
 - 함수 포인터의 직접 접근이 아닌 대리자를 통한 함수 호출 방식 
 호출할 함수나 이를 포함하는 객체가 없어져도 대리자가 체크해 안전하게 처리할 수 있음. 
