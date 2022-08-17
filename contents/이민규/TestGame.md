@@ -10,6 +10,11 @@
 캐릭터 코드 대규모 변경  
 캐릭터 점프 추가
 
+- 08.17  
+캐릭터 에니메이션 블루프린트 개선  
+-스테이트에일리어스 추가  
+-블랜드스페이스 추가  
+
 # 코드 및 사진
 >08.14
 - 캐릭터 코드
@@ -163,6 +168,18 @@ void AMyCharacter::MoveRight(float axisvalue)
 	Controller->GetPawn()->AddMovementInput(Direction, axisvalue);
 }
 ```
+> 08.17
+- 캐릭터 애니메이션 블루프린트 개선
 <br>
-<img src='./Images/08.16.png' width=400/>
-<br>  
+<img src='./Images/08_17_1.png' width=400/>
+<br>
+
+- 스테이트 에일리어스
+<br>
+<img src='./Images/08_17_2.png' width=400/>
+<br>
+
+- 블랜드스페이스
+<br>
+<img src='./Images/08_17_03.png' width=400/>
+<br>
