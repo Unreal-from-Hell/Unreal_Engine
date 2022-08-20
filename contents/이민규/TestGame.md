@@ -15,6 +15,11 @@
 -스테이트에일리어스 추가  
 -블랜드스페이스 추가  
 
+- 08.20  
+캐릭터 코드 변경  
+플레이어 컨트롤 추가  
+시점 3인칭 변경  
+캐릭터 이동 마우스로 이동 하게 수정
 # 코드 및 사진
 >08.14
 - 캐릭터 코드
@@ -182,4 +187,78 @@ void AMyCharacter::MoveRight(float axisvalue)
 - 블랜드스페이스
 <br>
 <img src='./Images/08_17_03.png' width=400/>
+<br>
+
+> 08.20
+- 캐릭터코드
+```c++
+AMyPlayerController::AMyPlayerController()
+{
+	bShowMouseCursor = true;
+	DefaultMouseCursor = EMouseCursor::Default;
+}
+
+void AMyPlayerController::PlayerTick(float DeltaTime)
+{
+	Super::PlayerTick(DeltaTime);
+
+	if(_MousePressed)
+	{
+		_MousePressdTime += DeltaTime;
+		FVector HitLocation = FVector::ZeroVector;
+		FHitResult Hit;
+		GetHitResultUnderCursor(ECC_Visibility , true ,Hit);
+		HitLocation = Hit.Location;
+
+		APawn * const MyPawn = GetPawn();
+		if(MyPawn)
+		{
+			FVector WorldDirection = (HitLocation - MyPawn->GetActorLocation()).GetSafeNormal();
+			MyPawn->AddMovementInput(WorldDirection , 1.0f, false);
+		}
+	}
+	else
+	{
+		{
+			_MousePressdTime = 0.0f;
+		}
+	}
+	
+}
+
+void AMyPlayerController::SetupInputComponent()
+{
+	Super::SetupInputComponent();
+
+	InputComponent->BindAction(TEXT("RightMouseClick") , IE_Pressed , this ,&AMyPlayerController::DestinationMovePressd);
+	InputComponent->BindAction(TEXT("RightMouseClick") , IE_Released , this ,&AMyPlayerController::DestinationMoveRelase);
+}
+
+void AMyPlayerController::DestinationMovePressd()
+{
+	_MousePressed = true;
+	
+	// StopMovement();
+}
+
+void AMyPlayerController::DestinationMoveRelase()
+{
+	_MousePressed = false;
+
+	if(_MousePressdTime  < ShortPressTime)
+	{
+		FVector HitLocation = FVector::ZeroVector;
+		FHitResult Hit;
+		GetHitResultUnderCursor(ECC_Visibility , true ,Hit);
+		HitLocation = Hit.Location;
+
+		UAIBlueprintHelperLibrary::SimpleMoveToLocation(this , HitLocation);
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(this , MouseCursor , HitLocation , FRotator::ZeroRotator , FVector(1.0f , 1.0f ,1.0f) , true , true , ENCPoolMethod::None , true);
+	}
+	
+}
+```
+
+<br>
+<img src='./Images/08_20.png' width=400/>
 <br>
