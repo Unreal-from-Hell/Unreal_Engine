@@ -23,6 +23,7 @@
 - GetActorUpVector() : 액터가 향하는 방향기준 z축 상의 좌표를 벡터로 반환
 - FRotationMatrix.GetScaledAxis(EAxis::X or Y or Z) : 행렬에서 이동 행렬을 뺀 순수하게 회전에 대한 행렬이면서 FVector로 반환
 - bStartWithTickEnabled : 생성자에서만 호출해야하며 원하는 시점에 Tick을 활성화 할 수 있도록 하는 함수
+- UKismetMathLibrary::Vsize : 벡터의 길이를 반환
 
 ## 변수
 - FRotationMatrix : 행렬 컨테이너
@@ -64,10 +65,16 @@ Category : 필수
 ->Attach 할때 SpringArmComponent::SocketName을 넣어줘야 스프링암 소켓에 붙어짐  
 ->bUsePawnControlRotation : 캐릭터의 컨트롤러의 회전을 따라 갈지 설정 
 ->bDoCollisionTest : 카메라가 벽을 뚫지 않게 만드는 옵션
+- 액터 컴포턴트 (class UActorComponent) : Actor에 추가할 수 있는 재사용 가능한 동작을 정의하는 구성 요소의 기본 클래스입니다.
+->GetVelocity : 속도를 벡터로 반환
+- 캐릭터 컴포넌트 (class ACharacter) : 폰 컴포넌트에서 충돌 방향 매쉬 같은 것을 추가적으로 가진 클래스 입니다.
+->PlayAnimMontage : 몽타주를 실행시켜주는 함수
 - 캐릭터 무브먼트 컴포넌트(class UCharacterMovementComponent) : 서브 오브젝트로 달린 액터 (또는 캐릭터)에 일정한 형태의 이동을 제공합니다  
 ->orientRotationtoMovement : 캐릭터가 가속되고 있는 방향으로 회전  
 ->bUseControllerRotation(roll,pitch,yaw) : 폰이 컨트롤러의 pitch yaw roll을 가져갈지 결정  
 ->BrakingDecelerationWalking : 미끄러짐 방지 설정  
+->IsFalling : 캐릭터가 공중에 있는지 확인 하는 함수
+->GetCurrentAcceleration : 캐릭터의 가속도를 얻는함수
 - 플레이어 컨트롤러 컴포넌트(class APlayerController) : Pawn과 그것을 제어하려는 사람 사이의 인터페이스로서, 플레이어의 의지를 대변하는 클래스이다  
 ->bShowMouseCursor : 게임 내에서 마우스가 보일지 결정 옵션  
 ->DefaultMouseCursor = EMouseCursor::(Default) : 마우스 커서를 설정하는 함수  
@@ -88,6 +95,8 @@ DECLARE_DELEGATE_
 - 스테이트에일리어스 : 스테이트 에일리어스에 체크 되어 있는 스테이트에서 애니메이션을 진행중이여도 조건에 만족하면 해당 스테이트에일리어스 즉시 발동이됨
 - 블랜드스페이스 : 여러개의 에니메이션을 섞을 수 있으며 다양한 변수를 지정해 변수에 맞게 설정이 가능\
 - 애디티브 :  애니메이션 간의 차이를 계산하여 만들어지는 애니메이션을 말한다.
+- 몽타주 : 나의 애셋에 들어있는 애니메이션을 합쳐 선택적으로 재생할 수 있도록 해주는 유연한 툴입니다
+- 슬롯 : 애니메이션을 목적에 맞게 사용할 수 있는 노드 upper 같은 경우는 상단의 애니메이션만 사용
 
 ## AI
 - AI 언리얼에서 사용하기 위해 : Build.cs 파일에 "NavigationSystem", "AIModule", "Niagara"를 추가해야함
