@@ -24,10 +24,12 @@
 - FRotationMatrix.GetScaledAxis(EAxis::X or Y or Z) : 행렬에서 이동 행렬을 뺀 순수하게 회전에 대한 행렬이면서 FVector로 반환
 - bStartWithTickEnabled : 생성자에서만 호출해야하며 원하는 시점에 Tick을 활성화 할 수 있도록 하는 함수
 - UKismetMathLibrary::Vsize : 벡터의 길이를 반환
+- UKismetMathLibrary::FindLookAtRotation(start , End) : Start에서 End 방향을 바라보는 방향 Rotation을 구함
+- FMath::(R)InterpTo(current , target , deltatime , speed) : current -> target으로 speed속도로 값을 갱신하는 함수 R/F등 다양하게 가능
 
 ## 변수
 - FRotationMatrix : 행렬 컨테이너
-- FVector : X, Y, Z으로 구성된 3차원 공간의 벡터입니다.(자료구조 Vector아님!)
+- FVector : X, Y, Z으로 구성된 3차원 공간의 벡터입니다.(자료구조 Vector아님!)  
 ->GetSafeNormal : 벡터의 정규화(단위벡터)된 복사본을 가져와 길이에 따라 안전한지 확인합니다. 벡터 길이가 너무 작아 안전하게 정규화할 수 없는 경우 기본적으로 0 벡터를 반환합니다.
 - FRotator : Roll : X pitch : Y  Yaw : Z로 구성된 회전을 위한 컨테이너
 - FHitResult : 충돌 지점(point of impact) 및 해당 point의 표면(surface) normal과 같은 trace의 한 번의 hit 정보를 포함하는 구조체입니다.
@@ -79,14 +81,22 @@ Category : 필수
 ->bShowMouseCursor : 게임 내에서 마우스가 보일지 결정 옵션  
 ->DefaultMouseCursor = EMouseCursor::(Default) : 마우스 커서를 설정하는 함수  
 ->StopMovement : 컨트롤러가 현재 수행중인 이동을 중단하는 함수  
--> GetHitResultUnderCursor(ECC , trace , HitResult) : 마우스 커서 위치에 트레이스를 쏴서 그 결과를 가져오는 함수 
-ECC 검색 후 추가예정
+-> GetHitResultUnderCursor(ECC , trace , HitResult) : 마우스 커서 위치에 트레이스를 쏴서 그 결과를 가져오는 함수 (ECC_Visibility : Visibility 채널 모두 충돌)	
 
 ## 딜리게이트
 - 함수 포인터의 직접 접근이 아닌 대리자를 통한 함수 호출 방식 
 호출할 함수나 이를 포함하는 객체가 없어져도 대리자가 체크해 안전하게 처리할 수 있음. 
 동일한 형을 가진 함수 여러 개를 대리자가 묶어서 관리하고, 필요할 때 동시에 모두 호출하는 것이 가능함.
-DECLARE_DELEGATE_
+- 싱글 케스트	: 가장 기본적인 Delegate로 함수 1개를 바인드하여 사용합니다.
+- 멀티 케스트	: 싱글 케스트와 동일하지만 여러 함수를 바인드 할 수 있습니다.
+- 이벤트	: 멀티 케스트와 동일하지만 전역으로 설정할 수 없어 외부 클래스에서 추가 델리게이트 선언이 불가능합니다.
+- 다이나믹 : 다이나믹은 싱글과, 멀티 두개다 존재하며 다이나믹 델리게이트는 직렬화(Serialize)화 되어 블루프린트에서 사용 가능합니다.
+- 선언 : DECLARE_DELEGATE(F변수명) 
+- 설정 : DECLARE_DELEGATE_OneParam(델리게이변수 , 받을 매개변수 수)
+- 확인 : IsBound()
+- 호출 : Execute()
+- 해제 : Unbind()
+- 주의점 : 함수를 델리게이트 설정할경우 UFUNCITON 매크로 필수
 
 ## 직렬화
 - FArchive : 언리얼엔진에서 사용하는 직렬화
@@ -104,3 +114,11 @@ DECLARE_DELEGATE_
 
 ## 나이아가라
 - UNiagaraFunctionLibrary::SpawnSystemAtLocation : 해당위치에 나이아가라를 생성해주는 함수
+
+## 자료구조
+FString : string  
+TArray : vector  
+TMap : map  
+Tset : set  
+TList : LinkedList  
+Tqueue : queue  
