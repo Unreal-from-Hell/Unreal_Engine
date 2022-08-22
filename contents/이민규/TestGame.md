@@ -24,6 +24,11 @@
 - 08.21  
 캐릭터 애니메이션 대폭 변경   
 캐릭터 공격 모션 및 콤보기능 추가
+
+- 08.22  
+캐릭터 공격 기능 추가  
+캐릭터 공격 마우스 클릭의 위치에 따라가게 설정
+
 # 코드 및 사진
 >08.14
 - 캐릭터 코드
@@ -265,4 +270,123 @@ void AMyPlayerController::DestinationMoveRelase()
 
 <br>
 <img src='./Images/08_20.png' width=400/>
+
 <br>
+
+> 08.22
+- 캐릭터 공격 부분 코드
+```c++
+void AMyCharacter::AttackPress()
+{
+	if(_Attack == true)
+		_AttackSave = true;
+	else
+	{
+		_PlayerController = Cast<AMyPlayerController>(Controller);
+		if(_PlayerController)
+		{
+			_PlayerController->AttackRotator();
+			_Attack = true;
+			PlayAnimMontage(_ComboMonatgeArray[0] , 1.0 , EName::None);
+		}
+	}
+}
+
+void AMyCharacter::AttackComobo()
+{
+	if(_AttackSave == true) 
+	{
+		_AttackSave = false;
+		switch (_AttackCombo)
+		{
+		case 0:
+			_PlayerController->AttackRotator();
+			_AttackCombo = 1;
+			PlayAnimMontage(_ComboMonatgeArray[1] , 1.0 , EName::None);
+			break;
+		case 1:
+			_PlayerController->AttackRotator();
+			_AttackCombo = 0;
+			PlayAnimMontage(_ComboMonatgeArray[2] , 1.0 , EName::None);
+			break;
+		}
+	}
+}
+
+void AMyCharacter::AttackResetCombo()
+{
+	_Attack = false;
+	_AttackSave = false;
+	_AttackCombo = 0;
+}
+```
+
+- 플레이어 컨트롤 공격 부분 
+```c++
+void AMyPlayerController::MousePressedMoveTick(float deltatime)
+{
+	if(_MousePressed)
+	{
+		_MousePressdTime += deltatime;
+		FVector HitLocation = FVector::ZeroVector;
+	
+		FHitResult Hit;
+		GetHitResultUnderCursor(ECC_Visibility , true , Hit);
+
+		HitLocation = Hit.Location;
+		APawn * const MyPawn = GetPawn();
+		if(MyPawn)
+		{
+			FVector WorldDirection = (HitLocation - MyPawn->GetActorLocation()).GetSafeNormal();
+			MyPawn->AddMovementInput(WorldDirection , 1.0f, false);
+		}
+	}
+	else
+	{
+		_MousePressdTime = 0.0f;
+	}
+}
+
+
+void AMyPlayerController::DestinationMovePressd()
+{
+	_MousePressed = true;
+	
+	// StopMovement();
+}
+
+void AMyPlayerController::DestinationMoveRelease()
+{
+	_MousePressed = false;
+
+	if(_MousePressdTime  < ShortPressTime)
+	{
+		FVector HitLocation = FVector::ZeroVector;
+		FHitResult Hit;
+		GetHitResultUnderCursor(ECC_Visibility , true ,Hit);
+		HitLocation = Hit.Location;
+
+		UAIBlueprintHelperLibrary::SimpleMoveToLocation(this , HitLocation);
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(this , MouseCursor , HitLocation , FRotator::ZeroRotator , FVector(1.0f , 1.0f ,1.0f) , true , true , ENCPoolMethod::None , true);
+	}
+}
+
+void AMyPlayerController::AttackRotator()
+{
+	FHitResult Hit;
+	GetHitResultUnderCursor(ECC_Visibility , true , Hit);
+
+	APawn * const MyPawn = GetPawn();
+	if(MyPawn)
+		_TargetRotator = UKismetMathLibrary::FindLookAtRotation( MyPawn->GetActorLocation() , FVector(Hit.Location.X ,Hit.Location.Y ,MyPawn->GetActorLocation().Z));
+
+}
+
+void AMyPlayerController::MouseAttackRotatorTick(float deltatime)
+{
+	AMyCharacter * MyPawn = Cast<AMyCharacter>(GetPawn());
+	
+	if(MyPawn && MyPawn->GetAttack())
+		MyPawn->SetActorRotation(FMath::RInterpTo(MyPawn->GetActorRotation() , _TargetRotator , deltatime , 15.0f));
+}
+```
